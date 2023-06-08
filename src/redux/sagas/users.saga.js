@@ -38,6 +38,7 @@ function* editUser({payload, id}) {
 }
 function* deleteUser({id}) {
   try {
+    yield put({type: 'DELETE_USER_LOADING'});
     yield call(axios.delete, 'https://jsonplaceholder.typicode.com/users/' + id);
     yield put({type: 'DELETE_USER_SUCCESS', data: id});
   } catch (error) {

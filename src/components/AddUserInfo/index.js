@@ -3,10 +3,9 @@ import { connect } from 'react-redux'
 import {bindActionCreators} from 'redux';
 import {
   addUser } from "../../redux/actions/user-action";
+import { LoadingIndicator } from '../LoadingIndicator';
 
- const AddUserInfo = ({addUser, users}) => {
-
-  console.log("add users---", users);
+ const AddUserInfo = ({addUser, users,isAddUserLoading}) => {
 const submitHandler = e => {
   e.preventDefault();
   const data = {name: e.target.name.value, username: e.target.username.value, email: e.target.email.value, phone: e.target.phone.value, website: e.target.website.value};
@@ -40,8 +39,6 @@ const submitHandler = e => {
 </table>
   )}
    
-    
-
     <div className="card container w-50">
   <h5 class="card-title">Add User</h5>
   <div className="card-body">
@@ -57,19 +54,16 @@ const submitHandler = e => {
     <label>Phone</label>
     <input type="text" name="phone" className="col-12"  />
     <div className="clearfix"></div>
-    <button
+    {isAddUserLoading ? <div className='mx-4'><LoadingIndicator/></div> :<button
             type="submit"
             fullWidth            
             className="btn btn-primary"
-           
           >
             Add User
-          </button>
+          </button> }
     </form>
   </div>
 </div>
-
-{/* <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => addUser({name: 'naveen', username: 'navin', email: 'naveen@april.biz'})}>Add user</button> */}
     </div>
 
     
@@ -79,6 +73,7 @@ const submitHandler = e => {
 const mapStateToProps = (state) => {
   return {
     users: state.users,
+    isAddUserLoading: state.isAddUserLoading,
   };
 };
 

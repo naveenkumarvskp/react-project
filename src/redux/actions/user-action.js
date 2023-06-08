@@ -28,3 +28,7 @@ export const isUpateUserLoading = () => {
 export const isAddUserLoading = () => {
   return {type: 'ADD_USER_LOADING'};
 };
+
+export const isDeleteUserLoading = () => {
+  return {type: 'DELETE_USER_LOADING'};
+};
