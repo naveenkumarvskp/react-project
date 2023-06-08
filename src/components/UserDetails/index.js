@@ -4,15 +4,17 @@ import {bindActionCreators} from 'redux';
 import { getAllUsers,deleteUser } from "../../redux/actions/user-action";
 import ModalInfo from '../ModalInfo';
 import EditUserInfoModal from '../EditUserInfoModal';
+import { LoadingIndicator } from '../LoadingIndicator';
 
-
-const UserDetails= ({getAllUsers,users,deleteUser})=> {
+const UserDetails= ({getAllUsers,users,deleteUser,isDeleteUserLoading})=> {
 
   const dispatch = useDispatch();
 // console.log("userdetails---", users);
   useEffect(() => {
     dispatch(getAllUsers())
   }, []);
+
+  const [selectedBtnId, setSelectedBtnId] = useState(-1);
  
   const [showModal, setShowModal] = useState({
     show: false,
@@ -40,6 +42,11 @@ const UserDetails= ({getAllUsers,users,deleteUser})=> {
     });
   }
 
+  const deleteUserInfo = (id) => {
+    setSelectedBtnId(id);
+    deleteUser(id);
+  }
+
   const editModalClose = () => {
     setOpenEditModal({ isEditModalOpen: false, EditUserDetails: "" 
     });
@@ -65,7 +72,7 @@ const UserDetails= ({getAllUsers,users,deleteUser})=> {
               <div className="mt-4 d-flex justify-content-between align-items-center">
                
                 <button type="button" className="btn btn-outline-primary" onClick={() => handleShow(user)} >More Details</button>
-                <button type="button" className="btn btn-outline-danger" onClick={() => deleteUser(user.id)}>Delete</button>
+                {isDeleteUserLoading && selectedBtnId === user.id ? <div className='mx-4'><LoadingIndicator/></div> :<button type="button" className="btn btn-outline-danger" onClick={() => deleteUserInfo(user.id)}>Delete</button>}
                 <button type="button" className="btn btn-outline-success" onClick={() => editUser(user)}>Edit User Details</button>
               
               </div>
@@ -88,6 +95,7 @@ const mapStateToProps = (state) => {
   // console.log(state.users);
   return {
     users: state.users,
+    isDeleteUserLoading: state.isDeleteUserLoading,
   };
 };
 

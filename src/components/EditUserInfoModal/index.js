@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import {bindActionCreators} from 'redux';
 import {
   editUser } from "../../redux/actions/user-action";
+import { LoadingIndicator } from '../LoadingIndicator';
 
 const EditUserInfoModal = ({editUser,isUpdateUserLoading, show ,handleClose,userInfo}) => {
 
@@ -95,7 +96,7 @@ const EditUserInfoModal = ({editUser,isUpdateUserLoading, show ,handleClose,user
       <Button variant="secondary" onClick={handleClose}>
         Close
       </Button>
-      <button type="submit" className="btn btn-primary">Submit</button>
+     {isUpdateUserLoading ? <div className='mx-4'><LoadingIndicator/></div> : <button type="submit" className="btn btn-primary">Submit</button> }
     </Modal.Footer>
     </form>
   </Modal>
