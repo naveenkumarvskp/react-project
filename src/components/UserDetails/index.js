@@ -9,7 +9,7 @@ import EditUserInfoModal from '../EditUserInfoModal';
 const UserDetails= ({getAllUsers,users,deleteUser})=> {
 
   const dispatch = useDispatch();
-console.log("userdetails---", users);
+// console.log("userdetails---", users);
   useEffect(() => {
     dispatch(getAllUsers())
   }, []);
