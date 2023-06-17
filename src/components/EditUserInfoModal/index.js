@@ -4,11 +4,13 @@ import Modal from 'react-bootstrap/Modal';
 import { connect } from 'react-redux'
 import {bindActionCreators} from 'redux';
 import {
-  editUser } from "../../redux/actions/user-action";
+  editUser, resetEditUserNotification } from "../../redux/actions/user-action";
 import { LoadingIndicator } from '../LoadingIndicator';
 
-const EditUserInfoModal = ({editUser,isUpdateUserLoading, show ,handleClose,userInfo}) => {
-
+const EditUserInfoModal = ({isUserEditNotification, resetEditUserNotification, editUser,isUpdateUserLoading, show ,handleClose,userInfo}) => {
+  useEffect(() => {
+    const timer = setTimeout(() => resetEditUserNotification(), 8000);
+    return () => clearTimeout(timer);}, [isUserEditNotification, resetEditUserNotification]);
   
   const initialFormValues = {
 		uname: userInfo.name,
@@ -55,6 +57,11 @@ const EditUserInfoModal = ({editUser,isUpdateUserLoading, show ,handleClose,user
     </Modal.Header>
     <form onSubmit={submitHandler}>
     <Modal.Body>
+    {isUserEditNotification && (
+  <div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">Successfully Edited UserInfo!</h4>
+  <p>Close the Modal and Please check the details</p>
+</div> )}
    
             <div className="form-group row mb-3">
                 <label for="name" className="col-sm-2 col-form-label">Name</label>
@@ -108,6 +115,7 @@ const EditUserInfoModal = ({editUser,isUpdateUserLoading, show ,handleClose,user
 const mapStateToProps = (state) => {
   return {
     isUpdateUserLoading: state.isUpdateUserLoading,
+    isUserEditNotification: state.isUserEditNotification
   };
 };
 
@@ -115,6 +123,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       editUser,
+      resetEditUserNotification,
     },
     dispatch,
   );

@@ -9,7 +9,7 @@ const ModalInfo = ({show ,handleClose,userInfo}) => {
     <Modal show={show} onHide={handleClose}>
     <Modal.Header closeButton>
       <Modal.Title>User Details</Modal.Title>
-      {/* {console.log("hello--", userInfo)} */}
+      {console.log("hello--", userInfo)}
     </Modal.Header>
     <Modal.Body>
 
@@ -19,49 +19,37 @@ const ModalInfo = ({show ,handleClose,userInfo}) => {
 				<thead>
 					<tr >
 						<th >Full Name</th>
-						<td>{userInfo.name}</td>
+						<td>{userInfo?.name}</td>
 					</tr>
           <tr >
 						<th >User Name</th>
-						<td>{userInfo.username}</td>
-					</tr>
-					<tr>
-						<th className="info">Address</th>
-						<td>{"Hello"}</td>
+						<td>{userInfo?.username}</td>
 					</tr>
 					<tr>
 						<th className="info">Email</th>
-						<td>{userInfo.email}</td>
+						<td>{userInfo?.email}</td>
 					</tr>
 					<tr>
 						<th className="info">Contact</th>
-						<td>{userInfo.phone}</td>
+						<td>{userInfo?.phone}</td>
 					</tr>
 					
 					<tr>
-						<th className="info">State</th>
-						<td>Maharashtra</td>
+						<th className="info">Street</th>
+						<td>{userInfo.address?.street}</td>
 					</tr>
 					<tr>
 						<th className="info">City</th>
-						<td>Pune</td>
+						<td>{userInfo.address?.city}</td>
+					</tr>
+					<tr>
+						<th className="info">Zipcode</th>
+						<td>{userInfo.address?.zipcode}</td>
 					</tr>
 					<tr >
-						<th  className="info">Service List</th>
-						<td>Service 1 , Service 2 , Serive 3</td>
+						<th  className="info">Company Info</th>
+						<td>{userInfo.company?.name + userInfo.company?.catchPhrase + userInfo.company?.bs}</td>
 					</tr>
-					<tr>
-						<th valign="top" className="info">Machine</th>
-						<td>Machine1 , Machine2 , Machine3</td>
-					</tr>
-					<tr>
-						<th className="info">Brand</th>
-						<td>Audi</td>
-					</tr>
-					{/* <tr>
-						<th className="info">Company Details</th>
-						<td>{userInfo.company.bs}{userInfo.company.catchPhrase}{userInfo.company.name}</td>
-					</tr> */}
 				</thead>
 
 			</table>

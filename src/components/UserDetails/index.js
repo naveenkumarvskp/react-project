@@ -1,18 +1,22 @@
 import React,{useEffect,useState  } from 'react'
 import { useDispatch, connect } from 'react-redux'
 import {bindActionCreators} from 'redux';
-import { getAllUsers,deleteUser } from "../../redux/actions/user-action";
+import { getAllUsers,deleteUser,restUserDeleteNotification } from "../../redux/actions/user-action";
 import ModalInfo from '../ModalInfo';
 import EditUserInfoModal from '../EditUserInfoModal';
 import { LoadingIndicator } from '../LoadingIndicator';
 
-const UserDetails= ({getAllUsers,users,deleteUser,isDeleteUserLoading})=> {
+const UserDetails= ({getAllUsers,restUserDeleteNotification,isUserDeleteSuccessfully,users,deleteUser,isDeleteUserLoading})=> {
 
   const dispatch = useDispatch();
 // console.log("userdetails---", users);
   useEffect(() => {
     dispatch(getAllUsers())
   }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => restUserDeleteNotification(), 8000);
+    return () => clearTimeout(timer);}, [isUserDeleteSuccessfully, restUserDeleteNotification]);
 
   const [selectedBtnId, setSelectedBtnId] = useState(-1);
  
@@ -56,6 +60,11 @@ const UserDetails= ({getAllUsers,users,deleteUser,isDeleteUserLoading})=> {
     <>
     <div className="album py-5 bg-body-tertiary">
     <div className="container">
+      {isUserDeleteSuccessfully && (<div class="alert alert-warning" role="alert">
+  <h4 class="alert-heading">You have success Deleted User!</h4>
+  <p>If you want add user then please go add user info page and add the user.</p>
+ 
+</div>)}
 
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {users.map((user)=>
@@ -69,11 +78,11 @@ const UserDetails= ({getAllUsers,users,deleteUser,isDeleteUserLoading})=> {
                 <li class="list-group-item"><b>Website: </b>{user.website}</li>
                 <li class="list-group-item"><b>Email: </b>{user.email}</li>
               </ul>
-              <div className="mt-4 d-flex justify-content-between align-items-center">
+              <div className="mt-4 d-flex flex-column align-items-center">
                
-                <button type="button" className="btn btn-outline-primary" onClick={() => handleShow(user)} >More Details</button>
-                {isDeleteUserLoading && selectedBtnId === user.id ? <div className='mx-4'><LoadingIndicator/></div> :<button type="button" className="btn btn-outline-danger" onClick={() => deleteUserInfo(user.id)}>Delete</button>}
-                <button type="button" className="btn btn-outline-success" onClick={() => editUser(user)}>Edit User Details</button>
+                <button type="button" className="btn btn-outline-primary w-100" onClick={() => handleShow(user)} >More Details</button>
+                {isDeleteUserLoading && selectedBtnId === user.id ? <div className='my-3'><LoadingIndicator/></div> :<button type="button" className="btn btn-outline-danger w-100 mt-2" onClick={() => deleteUserInfo(user.id)}>Delete</button>}
+                <button type="button" className="btn btn-outline-success w-100 mt-2" onClick={() => editUser(user)}>Edit User Details</button>
               
               </div>
             </div>
@@ -96,6 +105,7 @@ const mapStateToProps = (state) => {
   return {
     users: state.users,
     isDeleteUserLoading: state.isDeleteUserLoading,
+    isUserDeleteSuccessfully: state.isUserDeleteSuccessfully,
   };
 };
 
@@ -104,6 +114,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       getAllUsers,
       deleteUser,
+      restUserDeleteNotification,
     },
     dispatch,
   );

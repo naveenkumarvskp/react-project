@@ -32,3 +32,15 @@ export const isAddUserLoading = () => {
 export const isDeleteUserLoading = () => {
   return {type: 'DELETE_USER_LOADING'};
 };
+
+export const resetAddUserNotification = () => {
+  return {type: 'RESET_ADD_USER_NOTIFICATION'}
+}
+
+export const restUserDeleteNotification= () => {
+  return {type: 'RESET_DELETE_USER_NOTIFICATION'}
+}
+
+export const resetEditUserNotification = () => {
+  return {type: 'RESET_Edit_USER_NOTIFICATION'}
+}
