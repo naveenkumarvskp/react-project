@@ -4,6 +4,9 @@ const initialContacts = {
   isUpdateUserLoading: false,
   isAddUserLoading: false,
   isDeleteUserLoading: false,
+  isUserAddNotification: false,
+  isUserDeleteSuccessfully: false,
+  isUserEditNotification: false,
 };
 
 export const userReducer = (state = initialContacts, action) => {
@@ -19,7 +22,7 @@ export const userReducer = (state = initialContacts, action) => {
     case 'ADD_USER_SUCCESS': {
       let users = [...state.users];
       users.push(action.data);
-      return {...state, users, isAddUserLoading:false};
+      return {...state, users, isAddUserLoading:false, isUserAddNotification: true};
     }
     case 'ADD_USER_FAILED':
       return {...state, message: action.message};
@@ -27,7 +30,7 @@ export const userReducer = (state = initialContacts, action) => {
       let users = [...state.users];
       let findIndex = users.findIndex((user) => user.id === action.data.id);
       users[findIndex] = action.data;
-      return {...state, users, isUpdateUserLoading: false};
+      return {...state, users, isUpdateUserLoading: false, isUserEditNotification: true};
     }
     case 'EDIT_USER_FAILED':
       return {...state, message: action.message};
@@ -35,7 +38,7 @@ export const userReducer = (state = initialContacts, action) => {
       let users = [...state.users];
       let findIndex = users.findIndex((user) => user.id === action.data);
       users.splice(findIndex, 1);
-      return {...state, users,isDeleteUserLoading: false};
+      return {...state, users,isDeleteUserLoading: false ,isUserDeleteSuccessfully: true};
     }
     case 'DELETE_USER_FAILED':
       return {...state, message: action.message};
@@ -45,6 +48,12 @@ export const userReducer = (state = initialContacts, action) => {
       return {...state, isAddUserLoading: true};
     case 'DELETE_USER_LOADING':
         return {...state, isDeleteUserLoading: true};
+    case 'RESET_ADD_USER_NOTIFICATION':
+      return {...state, isUserAddNotification: false};
+    case 'RESET_DELETE_USER_NOTIFICATION':
+      return {...state, isUserDeleteSuccessfully: false};
+    case 'RESET_EDIT_USER_NOTIFICATION':
+      return {...state, isUserEditNotification: false};
     default:
       return state;
   }
