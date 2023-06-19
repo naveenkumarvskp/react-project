@@ -1,9 +1,3 @@
-// export const buyMobile = () => {
-//   return {type: 'BUY_MOBILE'};
-// };
-// export const sellMobile = () => {
-//   return {type: 'SELL_MOBILE'};
-// };
 export const getAllUsers = () => {
   return {type: 'GET_ALL_USERS'};
 };
@@ -42,5 +36,5 @@ export const restUserDeleteNotification= () => {
 }
 
 export const resetEditUserNotification = () => {
-  return {type: 'RESET_Edit_USER_NOTIFICATION'}
+  return {type: 'RESET_EDIT_USER_NOTIFICATION'}
 }
