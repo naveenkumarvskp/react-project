@@ -63,7 +63,7 @@ const UserDetails = ({
 
   return (
     <>
-      <div className="album py-5 bg-body-tertiary">
+      <div className="user-details py-5">
         <div className="container">
           {isUserDeleteSuccessfully && (
             <div class="alert alert-warning" role="alert">
@@ -77,27 +77,27 @@ const UserDetails = ({
 
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {users.map((user) => (
-              <div className="col" key={user.id}>
+              <div className="user-detail col" key={user.id}>
                 <div className="card shadow-sm">
                   <div className="card-body">
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">
+                    <ul className="list-group list-group-flush">
+                      <li className="list-group-item">
                         <b>Name: </b>
                         {user.name}
                       </li>
-                      <li class="list-group-item">
+                      <li className="list-group-item">
                         <b>User Name: </b>
                         {user.username}
                       </li>
-                      <li class="list-group-item">
+                      <li className="list-group-item">
                         <b>Phone: </b>
                         {user.phone}
                       </li>
-                      <li class="list-group-item">
+                      <li className="list-group-item">
                         <b>Website: </b>
                         {user.website}
                       </li>
-                      <li class="list-group-item">
+                      <li className="list-group-item">
                         <b>Email: </b>
                         {user.email}
                       </li>
