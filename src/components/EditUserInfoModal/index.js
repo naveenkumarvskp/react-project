@@ -18,6 +18,7 @@ const EditUserInfoModal = ({
   handleClose,
   userInfo,
 }) => {
+  console.log("userInfo--",userInfo);
   useEffect(() => {
     const timer = setTimeout(() => resetEditUserNotification(), 2000);
     return () => clearTimeout(timer);

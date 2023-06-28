@@ -16,7 +16,7 @@ export const Footer = () => {
             </a>
           </li>
           <li className="nav-item">
-            <a href="/about" className="nav-link px-2 text-muted">
+            <a href="/aboutus" className="nav-link px-2 text-muted">
               About
             </a>
           </li>

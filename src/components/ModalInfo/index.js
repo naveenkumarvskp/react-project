@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 const ModalInfo = ({ show, handleClose, userInfo }) => {
+  console.log("handleClose--", handleClose);
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
