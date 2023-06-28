@@ -6,7 +6,7 @@ import "./styles.css";
 const Navbar = () => {
   return (
     <>
-      <header id="header" className="fixed-top d-flex align-items-center">
+      <header id="header" className="nav-bar fixed-top d-flex align-items-center">
         <div className="container d-flex align-items-center">
           <h1 className="logo me-auto">
             <NavLink to="/" className="navbar-brand">
