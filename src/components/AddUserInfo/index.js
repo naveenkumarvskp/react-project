@@ -36,11 +36,11 @@ const AddUserInfo = ({
       {isUserAddNotification && (
         <div class="alert alert-success" role="alert">
           <h4 class="alert-heading">Well done!</h4>
-          <p>New User added Successfully ! Please check above </p>
+          <p>New User added Successfully ! Please check below </p>
         </div>
       )}
       {users.length > 0 && (
-        <table className="table table-striped">
+        <table data-testid='userTest' className="table table-striped">
           <thead>
             <tr>
               <th scope="col">Username</th>

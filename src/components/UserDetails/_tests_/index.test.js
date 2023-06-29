@@ -1,10 +1,8 @@
 import React from "react";
-import { render as rtlRender,screen } from "@testing-library/react";
-import userEvent from '@testing-library/user-event'
+import { render as rtlRender} from "@testing-library/react";
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import Userdetails from "../index";
-
 import { SAMPLE_USERS_DETAILS } from "./sampleUserDetails";
 
 const mockStore = configureStore([]);
@@ -37,15 +35,4 @@ describe("<User Details />", () => {
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     expect(container.getElementsByClassName("user-detail").length).toBe(10);
   });
-
-  // it("Onclick on delete button, delete user", async ()  => {
-  //   connectedComponent(<Userdetails/>)
-  //   // ACT
-  // // await userEvent.click(screen.queryAllByText('Delete')[1])
-  // // const deleteButton = await screen.findAllByRole("button", {name: /Delete/i})
-  // const deleteButton= screen.getAllByRole("button", { name: /Delete/i })[0];
-  // userEvent.click(deleteButton);
-  //   expect(screen.getAllByRole('button',{name:"Delete"})).toHaveLength(9)
-  // });
-
 });
